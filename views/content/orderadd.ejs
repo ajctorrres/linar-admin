@@ -1,0 +1,99 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                <h1>Orders</h1>
+                </div>
+                <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Product</li>
+                    <li class="breadcrumb-item active">Add Order</li>
+                </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+      
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title"><h3>Add Order</h3></div>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="searchItem">Search</label>
+                                        <div class="input-group mb-3">
+                                            <input type="search" class="form-control" id="searchItem" placeholder="Search Item" aria-label="searchItem">
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-dark">
+                                                    <i class="fas fa-search"></i>
+                                                  </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                  <div class="form-group col-md-6">
+                                    <label for="itemQty">Quantity</label>
+                                    <input type="number" class="form-control" id="itemQty" placeholder="Quantity">
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="clientName">Ordered By:</label>
+                                    <div class="input-group mb-3">
+                                        <input type="search" class="form-control" id="clientName" placeholder="Search Client Name" aria-label="searchClient">
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-dark">
+                                                <i class="fas fa-search"></i>
+                                              </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="totalPrice">Total Price</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="peso-sign">&#8369;</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="totalPrice" placeholder="Total Price" aria-label="Unit Price" aria-describedby="peso-sign">
+                                          </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="itemTag">Item Tag</label>
+                                        <input type="text" class="form-control" id="itemTag" placeholder="Item Tag">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="itemType">Item Type</label>
+                                        <select id="itemType" class="form-control">
+                                            <option selected>Choose...</option>
+                                            <option value="B">Book</option>
+                                            <option value="S">Subscription</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="itemImage">Upload Image</label>
+                                        <input type="file" class="form-control" id="itemImage">
+                                    </div>
+                                </div>
+                                <div class="form-row justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Place Order</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
