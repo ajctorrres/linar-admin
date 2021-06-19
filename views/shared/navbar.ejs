@@ -99,14 +99,16 @@
           <img src="/img/user1-128x128.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="info">
-          <a class="d-block" style="color: black;">Jaehyung Park</a>
+          <a class="d-block" style="color: black;"><%=user%></a>
         </div>
       </div>
     </li>
     <li>
-      <a href="#" class="nav-link">
-        <i class="fas fa-sign-out-alt "></i>
-      </a>
+      <form action="/logout" method="GET">
+        <button type="submit" class="btn btn-light btn-block">
+          <i class="fas fa-sign-out-alt "></i>
+        </button>
+      </form>
     </li>
   </ul>
 </nav>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%-include ('shared/header.ejs')%>
+  <body>
+      <!-- Main content -->
+  <section class="login-content ">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="card" id="login-body">
+              <div class="card-body" >
+                  <div class="row justify-content-around">
+                    <div class="card-col col-md-6 align-self-center text-center" id="left">
+                      <img src="/img/linar-logo.png" alt="Linar-logo">
+                      <h3>Linar Education Materials Inc.</h3>
+                    </div>
+                    <div class="card-col col-md-6 align-self-center" id="right">
+                      <h2 class="card-head">Sign In</h2>
+                        <form method="POST" action="/auth">
+                            <div class="form-group">
+                              <label for="username">Username</label>
+                              <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter username">
+                            </div>
+                            <div class="form-group">
+                              <label for="userpassword">Password</label>
+                              <input type="password" class="form-control" id="userpassword" name="userpassword" placeholder="Password">
+                              <a role="button" href="#" class="forgot-pw">Forgot Password?</a>
+                            </div>
+                            <button type="submit" class="login btn btn-outline-light btn-block">Login</button>
+                          </form>
+                    </div>
+                  </div>
+                
+
+              </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+  <%-include ('shared/footer.ejs')%>
+  </body>
+</html>
