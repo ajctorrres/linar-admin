@@ -33711,6 +33711,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   display: block;
   margin-bottom: 20px;
   position: relative;
+  margin-left:30px;
 }
 
 .small-box > .inner {
@@ -33734,7 +33735,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 }
 
 .small-box h3 {
-  font-size: 2.2rem;
+  font-size: 5rem;
   font-weight: 700;
   margin: 0 0 10px;
   padding: 0;
@@ -33745,12 +33746,12 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   .col-xl-2 .small-box h3,
   .col-lg-2 .small-box h3,
   .col-md-2 .small-box h3 {
-    font-size: 1.6rem;
+    font-size: 3rem;
   }
-  .col-xl-3 .small-box h3,
+  .col-xl-3 .x h3,
   .col-lg-3 .small-box h3,
   .col-md-3 .small-box h3 {
-    font-size: 1.6rem;
+    font-size: 3rem;
   }
 }
 
@@ -33758,17 +33759,17 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   .col-xl-2 .small-box h3,
   .col-lg-2 .small-box h3,
   .col-md-2 .small-box h3 {
-    font-size: 2.2rem;
+    font-size: 5rem;
   }
   .col-xl-3 .small-box h3,
   .col-lg-3 .small-box h3,
   .col-md-3 .small-box h3 {
-    font-size: 2.2rem;
+    font-size: 5rem;
   }
 }
 
 .small-box p {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .small-box p > small {
