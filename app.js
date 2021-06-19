@@ -154,7 +154,7 @@ app.get('/product-add', (req, res)=>{
 })
 
 app.post('/addItem', urlencodedParser, (req,res)=>{
-    connection.query('INSERT INTO item(item_name, item_description, unit_price, item_type, item_img) VALUES ("'+req.body.itemName+'", "'+req.body.itemDescription+'", "'+req.body.itemPrice+'", "'+req.body.itemType+'", "'+req.body.itemImg+'")', (err)=>{
+    connection.query('START TRANSACTION; INSERT INTO item(item_name, item_description, unit_price, item_type, item_img) VALUES ("'+req.body.itemName+'", "'+req.body.itemDescription+'", "'+req.body.itemPrice+'", "'+req.body.itemType+'", "'+req.body.itemImg+'"); SET @bookid = last_insert_id(); INSERT INTO book_author(item_id, book_author) VALUES (@bookid, "'+req.body.itemAuthor+'"); INSERT INTO item_tag(item_no,`tag_id`) VALUES (@bookid, "'+req.body.itemTag+'"); COMMIT ;', (err)=>{
         if(err) throw err;
         res.redirect('/product-add');
     })
@@ -163,7 +163,7 @@ app.post('/addItem', urlencodedParser, (req,res)=>{
 
 //ORDERS
 app.get('/orders', (req, res)=>{
-    connection.query('SELECT * FROM ((purchase_order INNER JOIN purchase_order_detail ON purchase_order.id = purchase_order_detail.purchase_order_no) INNER JOIN client ON client.id = purchase_order.client_id);', (err, result)=>{
+    connection.query('SELECT purchase_order.id as id, item_id, total_qty, total_price, client_name, agent_id, purchase_date, purchase_status FROM ((purchase_order INNER JOIN purchase_order_detail ON purchase_order.id = purchase_order_detail.purchase_order_no) INNER JOIN client ON client.id = purchase_order.client_id);', (err, result)=>{
         if(err) throw err;
         res.render('orders', {order:result, user:req.session.username});
     })
@@ -178,7 +178,22 @@ app.get('/order-add', (req, res)=>{
 
 //DELIVERY
 app.get('/deliveries', (req, res)=>{
-    res.render('deliveries', {user:req.session.username});
+    connection.query('SELECT delivery_no, purchase_order_no, order_date_received, client_name, agent_name, qty_delivered, total_price, delivery_received_by FROM (((order_delivery INNER JOIN order_delivery_detail ON order_delivery.id = order_delivery_detail.delivery_no) INNER JOIN client ON client.id = order_delivery.client_id)) INNER JOIN agent ON agent.id = order_delivery.agent_id;', (err, result)=>{
+        if(err) throw err;
+        res.render('deliveries', {delivery:result});
+    })
+})
+
+app.get('/delivery-add', (req, res)=>{
+    res.render('delivery-add');
+})
+
+app.post('/adddelivery', urlencodedParser, (req,res)=>{
+    connection.query('START TRANSACTION; INSERT INTO order_delivery(order_date_received, client_id, purchase_order_no, agent_id) SELECT ?, client_id, purchase_order.id, agent_id FROM purchase_order WHERE purchase_order.id = ?; SET @deliveryid = last_insert_id(); INSERT INTO order_delivery_detail(delivery_no, item_no, qty_delivered, total_price, delivery_received_by) SELECT @deliveryid, item_id, total_qty, total_price, ? FROM purchase_order_detail WHERE purchase_order_no = ?; COMMIT;',
+    [req.body.dateDelivered, req.body.orderId, req.body.receipient, req.body.orderId], (err)=>{
+        if(err) throw err;
+       res.render('deliveries', {user:req.session.username});
+    
 })
 
 app.get('/logout', (req, res)=>{

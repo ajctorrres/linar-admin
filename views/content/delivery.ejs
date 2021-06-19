@@ -45,18 +45,19 @@
                 </thead>
                   <tbody>
 
+                  <% delivery.forEach(function(delivery){%>
                   <tr>
-                    <td>x</td>
-                    <td>x</td>
-                    <td>x</td>
-                    <td>x</td>
-                    <td>x</td>
-                    <td>x</td>
-                    <td>x</td>
-                    <td>x</td>
-                    <td>x</td>
+                    <td><%=delivery.delivery_no %></td>
+                    <td><%=delivery.purchase_order_no %></td>
+                    <td><%=delivery.order_date_received %></td>
+                    <td><%=delivery.client_name %></td>
+                    <td><%=delivery.agent_name %></td>
+                    <td><%=delivery.order_date_received %></td>
+                    <td><%=delivery.qty_delivered %></td>
+                    <td><%=delivery.total_price %></td>
+                    <td><%=delivery.delivery_received_by %></td>
                   </tr>
-
+                  <%})%>
                   </tbody>
                   <tfoot>
                   <tr>
