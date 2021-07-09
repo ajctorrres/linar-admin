@@ -8,9 +8,9 @@
                 </div>
                 <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="../dashboard">Dashboard</a></li>
                     <li class="breadcrumb-item active">Deliveries</li>
-                    <li class="breadcrumb-item active">Add delivery</li>
+                    <li class="breadcrumb-item active">Add Delivery</li>
                 </ol>
                 </div>
             </div>
@@ -26,29 +26,30 @@
                             <div class="card-title"><h3>Add delivery</h3></div>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="/adddelivery">
+                            <form method="POST">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="orderId">Order ID</label>
-                                        <input type="text" class="form-control" id="orderId" name="orderId" placeholder="Order ID">
+                                        <select id="orderId" name="orderId" class="form-control">
+                                            <option selected value="none">Choose...</option>
+                                            <%for(i=0; i<order.length; i++){ %>
+                                            <option name="order" value="<%=order[i].id%>"><%=order[i].id%> - <%=order[i].client_name %></option>
+                                            <%}%>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group col-md-6">
                                         <label for="dateDelivered">Date Delivered</label>
                                         <input type="date" class="form-control" id="dateDelivered" name="dateDelivered" >
                                     </div>
-                                </div>    
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="receipient">Receipient</label>
-                                        <input type="text" class="form-control" id="receipient" name="receipient" placeholder="Receipient">
+                                    <div class="form-group col-md-6">
+                                        <label for="receipient">Recipient</label>
+                                        <input type="text" class="form-control" id="recipient" name="recipient" placeholder="Recipient">
                                     </div>
-                                </div>
-                                
-
+                                </div>    
                                 <div class="form-row justify-content-end">
-                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                    <button type="button" id="adddelivery" class="btn btn-primary">Confirm</button>
                                 </div>
                             </form>
                         </div>

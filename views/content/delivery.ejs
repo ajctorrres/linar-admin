@@ -8,7 +8,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="../dashboard">Home</a></li>
+              <li class="breadcrumb-item"><a href="../dashboard">Dashboard</a></li>
               <li class="breadcrumb-item active">Deliveries</li>
               <li class="breadcrumb-item active">Show All</li>
             </ol>
@@ -29,47 +29,41 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-hover">
                   <thead>
                   <tr>
                     <th>Delivery No</th>
-                    <th>Order No</th>
-                    <th>Date Received</th>
-                    <th>Client</th>
-                    <th>Agent</th>
-                    <th>Date Received</th>
-                    <th>Qty Delivered</th>
-                    <th>Total Price</th>
+                    <th>Order ID</th>
                     <th>Received By</th>
+                    <th>Client</th>
+                    <th>Received On</th>
+                    <th>Total Quantity</th>
+                    <th>Total Price</th>
                   </tr>        
                 </thead>
                   <tbody>
 
-                  <% delivery.forEach(function(delivery){%>
-                  <tr>
-                    <td><%=delivery.delivery_no %></td>
-                    <td><%=delivery.purchase_order_no %></td>
-                    <td><%=delivery.order_date_received %></td>
-                    <td><%=delivery.client_name %></td>
-                    <td><%=delivery.agent_name %></td>
-                    <td><%=delivery.order_date_received %></td>
-                    <td><%=delivery.qty_delivered %></td>
-                    <td><%=delivery.total_price %></td>
-                    <td><%=delivery.delivery_received_by %></td>
+                    <% for ([id, deliverys] of deliveryss.entries()) { %>
+                  <tr class="rowClick" data-toggle="modal" data-target="#deliveryDetails<%=deliverys[0].delivery_no %>">
+                    <td><%=deliverys[0].delivery_no %></td>
+                    <td><%=deliverys[0].purchase_order_no %></td>
+                    <td><%=deliverys[0].delivery_received_by %></td>
+                    <td><%=deliverys[0].client_name %></td>
+                    <td><%=deliverys[0].order_date_received %></td>
+                    <td><%=deliverys[0].total_qty %></td>
+                    <td><%=deliverys[0].total_price %></td>
                   </tr>
-                  <%})%>
+                    <%}%>
                   </tbody>
                   <tfoot>
                   <tr>
                     <th>Delivery No</th>
-                    <th>Order No</th>
-                    <th>Date Received</th>
-                    <th>Client</th>
-                    <th>Agent</th>
-                    <th>Date Received</th>
-                    <th>Qty Delivered</th>
-                    <th>Total Price</th>
+                    <th>Order ID</th>
                     <th>Received By</th>
+                    <th>Client</th>
+                    <th>Received On</th>
+                    <th>Total Quantity</th>
+                    <th>Total Price</th>
                   </tr>
                   </tfoot>
                 </table>
@@ -85,4 +79,44 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+    <!-- Modal -->
+  <% for ([id, deliverys] of deliveryss.entries()) { %>
+    <div class="modal fade bd-example-modal-lg" id="deliveryDetails<%=deliverys[0].delivery_no %>" tabindex="-1" role="dialog" aria-labelledby="delivery DetailTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Item Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Item ID</th>
+                  <th scope="col">Item Name</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Unit Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (delivery of deliverys) { %>
+                  <tr>
+                    <td><%=delivery.item_no %></td>
+                    <td><%=delivery.item_name %></td>
+                    <td><%=delivery.qty_delivered %></td>
+                    <td><%=delivery.unit_price %></td>
+                  </tr>
+                <%}%>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%}%>
   </div>

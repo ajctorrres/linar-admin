@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="../dashboard">Dashboard</a></li>
                     <li class="breadcrumb-item active">Agents</li>
                     <li class="breadcrumb-item active">Add Agent</li>
                 </ol>
@@ -26,31 +26,25 @@
                             <div class="card-title"><h3>Add Agent</h3></div>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="/addAgent">
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="agentID">ID</label>
-                                        <input type="text" class="form-control" id="agentID" name="agentID" placeholder="ID">
-                                    </div>
-                                </div>
+                            <form method="POST" id="addAgentForm">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="agentName">Agent Name</label>
-                                        <input type="text" class="form-control" id="agentName" name="agentName" placeholder="Agent Name">
+                                        <input type="text" class="form-control" id="agentName" name="agentName" placeholder="Agent Name" required>
                                     </div>
                                 </div>    
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="agentContact">Contact Number</label>
-                                        <input type="text" class="form-control" id="agentContact" name="agentContact" placeholder="Contact Number">
+                                        <input type="text" class="form-control" id="agentContact" name="agentContact" placeholder="Contact Number" required>
                                     </div>
                                 </div>
 
                                 <div class="form-row justify-content-end">
-                                    <button type="submit" class="btn btn-primary">Add Agent</button>
+                                    <button type="button" id="addAgent" class="btn btn-primary">Add Agent</button>
                                 </div>
                             </form>
-                        </div>
+                        </div>  
                     </div>
                 </div>
             </div>

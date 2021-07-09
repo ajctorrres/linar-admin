@@ -46,7 +46,9 @@
 <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -63,4 +65,243 @@
       "responsive": true,
     });
   });
+
+  $("#addItem").click(function(){
+    var itemName = $("#itemName").val();
+    var itemDescription = $("#itemDescription").val();
+    var itemType = $("#itemType").val();
+    var itemPrice = $("#itemPrice").val();
+    var itemAuthor = $("#itemAuthor").val();
+    var itemImg = document.getElementById("itemImg").files[0].name;
+    var itemTag = $("#itemTag").val();
+    var itemTag = [ ];
+    $(':checkbox:checked').each(function(x){
+      itemTag[x] = $(this).val();
+    });
+    if(itemName=='' || itemDescription=='' || itemType=='' || itemPrice=='' || itemTag=='' || itemImg==''){
+      swal({
+        title: "Missing Input!",
+        text: "Please check the missing field.",
+        icon: "warning",
+        button: "OK",
+      });
+
+    }else{
+      swal({
+        title: "Success!",
+        text: "Item Added Successfully.",
+        icon: "success",
+        button: "OK",
+      }).then(willAdd =>{
+        if(willAdd){
+          $.ajax({
+            type: "POST",
+            url: '/addItem',
+            data:{
+              itemName: itemName,
+              itemDescription: itemDescription,
+              itemType: itemType,
+              itemPrice: itemPrice,
+              itemAuthor: itemAuthor,
+              itemTag: itemTag,
+              itemImg: itemImg
+            },
+            success: function(data){
+              location.reload();
+            }
+          })
+        }  
+      });
+    }
+  });
+
+  
+  $('#addAgent').click('submit', function(){
+    var agentName = $("#agentName").val();
+    var agentContact = $("#agentContact").val();
+
+    if(agentName=='' || agentContact==''){
+      swal({
+        title: "Missing Input!",
+        text: "Please check the missing field.",
+        icon: "warning",
+        button: "OK",
+      });
+
+    }else{
+      swal({
+        title: "Success!",
+        text: "Agent Added Successfully.",
+        icon: "success",
+        button: "Ok",
+      }).then(willAdd =>{
+        if(willAdd){
+          $.ajax({
+            type: "POST",
+            url: '/addAgent',
+            data:{
+              agentName: agentName,
+              agentContact: agentContact
+            },
+            success: function(data){
+              location.reload();
+            }
+          })
+        }  
+      });  
+    }
+  });
+
+  $("#addClient").click(function(){
+    var clientName = $("#clientName").val();
+    var clientAddress = $("#clientAddress").val();
+    var clientEmail = $("#clientEmail").val();
+    var password = $("#password").val();
+    var contactPerson = $("#contactPerson").val();
+    var contactNumber = $("#contactNumber").val();
+
+    if(clientName=='' || clientAddress=='' || clientEmail=='' || password==''|| contactPerson=='' || contactNumber==''){
+      swal({
+        title: "Missing Input!",
+        text: "Please check the missing field.",
+        icon: "warning",
+        button: "OK",
+      });
+    }else{
+      swal({
+        title: "Success!",
+        text: "Client Added Successfully.",
+        icon: "success",
+        button: "OK",
+      }).then(clientAdd =>{
+          if(clientAdd){
+            $.ajax({
+              type: "POST",
+              url: '/addclient',
+              data:{
+                clientName:clientName, 
+                clientAddress:clientAddress,
+                clientEmail:clientEmail,
+                password:password,
+                contactPerson:contactPerson,
+                contactNumber:contactNumber
+              },
+              success: function(data){
+                location.reload();
+              }
+            })
+          }
+      })
+    }
+  });
+
+  $("#approveClient").click(function(){
+    var clientPassword = $("#clientPassword").val();
+    var clientID = $("#approveClient").val();
+    if(clientPassword==''){
+      swal({
+        title: "Missing Input!",
+        text: "Please check the missing field.",
+        icon: "warning",
+        button: "OK",
+      });
+
+    }else{
+      swal({
+        title: "Success!",
+        text: "Client Approved Successfully.",
+        icon: "success",
+        button: "OK",
+      }).then(willApprove =>{
+        if(willApprove){
+          $.ajax({
+            type: "POST",
+            url: '/client-approval',
+            data:{
+              clientPassword: clientPassword,
+              clientID: clientID
+            },
+            success: function(data){
+              location.reload();
+            }
+          })
+        }  
+      });
+    }
+  });
+
+  $("#adddelivery").click(function(){
+    var orderId = $("#orderId").val();
+    var dateDelivered = $("#dateDelivered").val();
+    var recipient = $("#recipient").val();
+    if(orderId=='none' || dateDelivered=='' || recipient==''){
+      swal({
+        title: "Missing Input!",
+        text: "Please check the missing field.",
+        icon: "warning",
+        button: "OK",
+      });
+
+    }else{
+      swal({
+        title: "Success!",
+        text: "Delivery Added Successfully.",
+        icon: "success",
+        button: "OK",
+      }).then(addDlvry =>{
+        if(addDlvry){
+          $.ajax({
+            type: "POST",
+            url: '/adddelivery',
+            data:{
+              orderId: orderId,
+              dateDelivered: dateDelivered,
+              recipient:recipient
+            },
+            success: function(data){
+              location.reload();
+            }
+          })
+        }  
+      });
+    }
+  });
+
+  // $("#editPrice").click(function(){
+  //   var newPrice = $("#newPrice").val();
+  //   var item_id = $("#item_id").val();
+  //   if(newPrice==''){
+  //     swal({
+  //       title: "Missing Input!",
+  //       text: "Please check the missing field.",
+  //       icon: "warning",
+  //       button: "OK",
+  //     });
+
+  //   }else{
+  //     swal({
+  //       title: "Success!",
+  //       text: "Price Changed Successfully.",
+  //       icon: "success",
+  //       button: "OK",
+  //     }).then(addPrice =>{
+  //       if(addPrice){
+  //         $.ajax({
+  //           type: "POST",
+  //           url: '/updatePrice',
+  //           data:{
+  //             newPrice: newPrice,
+  //             item_id: item_id
+  //           },
+  //           success: function(data){
+  //             location.reload();
+  //           }
+  //         })
+  //       }  
+  //     });
+  //   }
+  // });
+
+  
+  
 </script>

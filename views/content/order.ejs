@@ -8,7 +8,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="../dashboard">Home</a></li>
+              <li class="breadcrumb-item"><a href="../dashboard">Dashboard</a></li>
               <li class="breadcrumb-item active">Orders</li>
               <li class="breadcrumb-item active">Show All</li>
             </ol>
@@ -29,42 +29,39 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-hover">
                   <thead>
                   <tr>
                     <th>Order ID</th>
-                    <th>Item ID</th>
                     <th>Quantity</th>
                     <th>Total Price</th>
-                    <th>Ordered By:</th>
-                    <th>Agent ID:</th>
+                    <th>Ordered By</th>
+                    <th>Institution</th>
                     <th>Order Date</th>
                     <th>Status</th>
                   </tr>        
                 </thead>
                   <tbody>
                     
-                <% order.forEach(function(order){%>
-                  <tr>
-                    <td><%=order.id %></td>
-                    <td><%=order.item_id %> </td>
-                    <td><%=order.total_qty %></td>
-                    <td><%=order.total_price %></td>
-                    <td><%=order.client_name %></td>
-                    <td><%=order.agent_id %></td>
-                    <td><%=order.purchase_date %></td>
-                    <td><%=order.purchase_status %></td>
-                  </tr>
-                <%})%>
+                <% for([id, orders] of orderss.entries()) { %>
+                  <tr class="rowClick" id="<%=orders[0].id %>" data-toggle="modal" data-target="#itemDetails<%=orders[0].id %>">
+                    <td><%=orders[0].id %></td>
+                    <td><%=orders[0].total_qty %></td>
+                    <td><%=orders[0].total_price %></td>
+                    <td><%=orders[0].client_contact_person %></td>
+                    <td><%=orders[0].client_name %></td>
+                    <td><%=orders[0].purchase_date %></td>
+                    <td style="color: #16a62b;"><em><%=orders[0].purchase_status?'Delivered':'For Delivery' %></em></td>
+                  </tr> 
+                <%}%>
                   </tbody>
                   <tfoot>
                   <tr>
                     <th>Order ID</th>
-                    <th>Item ID</th>
                     <th>Quantity</th>
                     <th>Total Price</th>
-                    <th>Ordered By:</th>
-                    <th>Agent ID:</th>
+                    <th>Ordered By</th>
+                    <th>Institution</th>
                     <th>Order Date</th>
                     <th>Status</th>
                   </tr>
@@ -82,4 +79,44 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+    
+    <% for([id, orders] of orderss.entries()) { %>
+      <div class="modal fade bd-example-modal-lg" id="itemDetails<%=orders[0].id %>" tabindex="-1" role="dialog" aria-labelledby="item DetailTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Order Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Item ID</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (order of orders) { %>
+                  <tr>
+                    <th scope="row"><%=order.item_id%></th>
+                    <td><%=order.item_name%></td>
+                    <td><%=order.qty%></td>
+                    <td><%=order.item_price%></td>
+                  </tr>
+                  <%} %>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%}%>
   </div>
